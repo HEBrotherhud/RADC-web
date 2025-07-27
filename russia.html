@@ -107,8 +107,9 @@
       display: flex;
       gap: 20px;
       justify-content: center;
-      margin-top: 2rem;
+      margin-top: 4rem;
       opacity: 0;
+      background color: 0.3 ease-in-out;
       transform: translateY(20px);
       animation: fadeUp 0.8s forwards 0.8s;
     }
@@ -130,7 +131,7 @@
     
     .btn-primary {
       background: var(--primary);
-      color: white;
+      color: whitesmoke;
     }
     
     .btn-primary:hover {
@@ -641,6 +642,37 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+    .glow-border {
+  position: relative;
+  z-index: 1;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(270deg, red, orange, red);
+  background-size: 600% 600%;
+  border-radius: 50px;
+  z-index: -1;
+  filter: blur(8px);
+  animation: borderRotate 4s linear infinite;
+}
+
+@keyframes borderRotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -657,7 +689,7 @@
       <h1>Russia Automotive Development Centre</h1>
       <p>VW & Audi Specialist</p>
       <div class="header-buttons">
-        <button onclick="scrollToSection()" class="btn btn-primary">Request Assistance</button>
+        <button onclick="scrollToSection()" class="btn btn-primary glow-border">Request Assistance</button>
       </div>
     </div>
   </header>
@@ -897,7 +929,7 @@
 
     // Step 2: Reverse geocode with OpenCage
     function reverseGeocode(lat, lon) {
-      const apiKey = '88fe2aa5cf9d45c1be6a86484ff7c2';
+      const apiKey = '88fe2aa5cf9d45c1be6a86484ff7c2cf';
       const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${apiKey}`;
 
       fetch(url)
